@@ -10,7 +10,7 @@ export default class Main extends Component {
   state = {
     newRepo: '',
     repositories: [],
-    loading: false,
+    loading: 'no',
   };
 
   componentDidMount() {
@@ -39,20 +39,27 @@ export default class Main extends Component {
     e.preventDefault();
 
     this.setState({
-      loading: true,
+      loading: 'yes',
     });
 
     const { newRepo, repositories } = this.state;
-    const response = await api.get(`/repos/${newRepo}`);
-    const data = {
-      name: response.data.full_name,
-    };
+    try {
+      const response = await api.get(`/repos/${newRepo}`);
+      const data = {
+        name: response.data.full_name,
+      };
 
-    this.setState({
-      repositories: [...repositories, data],
-      newRepo: '',
-      loading: false,
-    });
+      this.setState({
+        repositories: [...repositories, data],
+        newRepo: '',
+        loading: 'no',
+      });
+    } catch(err) {
+      this.setState({
+        newRepo: '',
+        loading: 'no',
+      });
+    }
   };
 
   render() {
@@ -73,7 +80,7 @@ export default class Main extends Component {
             onChange={this.handleInputChange}
           />
           <SubmitButton loading={loading}>
-            {loading ? (
+            {loading === 'yes' ? (
               <FaSpinner color="#FFF" size={14} />
             ) : (
               <FaPlus color="#FFF" size={14} />
