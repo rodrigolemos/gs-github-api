@@ -5,6 +5,8 @@ import { FaGithubAlt, FaPlus, FaSpinner } from 'react-icons/fa';
 import Container from '../../components/Container';
 import { Form, SubmitButton, List } from './styles';
 import api from '../../services/api';
+import { ToastContainer, Slide, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default class Main extends Component {
   state = {
@@ -59,6 +61,14 @@ export default class Main extends Component {
         newRepo: '',
         loading: 'no',
       });
+      toast.error('Nenhum repositório encontrado!', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
 
@@ -98,6 +108,18 @@ export default class Main extends Component {
             </li>
           ))}
         </List>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          transition={Slide}
+          pauseOnVisibilityChange
+          draggable
+          pauseOnHover
+          />
       </Container>
     );
   }
