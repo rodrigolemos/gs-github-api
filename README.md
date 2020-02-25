@@ -1,6 +1,6 @@
 # Bootcamp Github API Project
 
-The main objective of this app is to show the practical usability of a third part API, showing users, repositories and issues from github API.
+The main objective of this app is to show the practical usability of a third part API, showing users, repositories and issues from Github.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
